@@ -9,7 +9,10 @@
       />
       <span class="check"></span>
     </div>
-    <p class="item">{{ todo.title }}</p>
+    <p class="item">
+      <del v-if="todo.isComplete == true">{{ todo.title }}</del>
+      <span v-else v-text="todo.title"></span>
+    </p>
     <button class="clear" @click="deleteTodo">
       <img :src="crossImage" alt="Clear it" />
     </button>
@@ -29,7 +32,7 @@ export default {
   },
   methods: {
     deleteTodo() {
-      if (confirm('آیا از حذف کار خود اطمینان دارید؟')) {
+      if (confirm('آیا از حذف اطمینان دارید ؟')) {
         this.$emit('Deleted', this.todo.id)
       }
     },
@@ -39,5 +42,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

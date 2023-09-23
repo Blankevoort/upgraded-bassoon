@@ -24,17 +24,14 @@
 export default {
   data() {
     return {
-      todoTitle: "",
-    };
+      todoTitle: ''
+    }
   },
   methods: {
     AddTodo() {
-      this.$emit("AddNewTodo", this.todoTitle);
-      this.todoTitle = "";
-    },
-  },
-};
+      this.$emit('AddNewTodo', this.todoTitle)
+      this.todoTitle = ''
+    }
+  }
+}
 </script>
-
-<style>
-</style>
