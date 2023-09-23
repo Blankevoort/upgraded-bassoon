@@ -20,18 +20,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      todoTitle: ''
-    }
-  },
-  methods: {
-    AddTodo() {
-      this.$emit('AddNewTodo', this.todoTitle)
-      this.todoTitle = ''
-    }
-  }
+<script setup>
+import { ref, defineEmits } from "vue";
+
+const todoTitle = ref("");
+const emits = defineEmits(["AddNewTodo"]);
+
+function AddTodo() {
+  emits("AddNewTodo", todoTitle.value);
+  todoTitle.value = "";
 }
 </script>
+
+<style></style>

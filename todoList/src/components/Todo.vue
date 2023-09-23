@@ -14,31 +14,28 @@
       <span v-else v-text="todo.title"></span>
     </p>
     <button class="clear" @click="deleteTodo">
-      <img :src="crossImage" alt="Clear it" />
+      <img :src="Cross" alt="Clear it" />
     </button>
   </li>
 </template>
 
-<script>
-import Cross from '../assets/icon-cross.svg'
-export default {
-  props: {
-    todo: Object
-  },
-  data() {
-    return {
-      crossImage: Cross
-    }
-  },
-  methods: {
-    deleteTodo() {
-      if (confirm('آیا از حذف اطمینان دارید ؟')) {
-        this.$emit('Deleted', this.todo.id)
-      }
-    },
-    changeStatus() {
-      this.$emit('changeStatus', this.todo.id, !this.todo.isComplete)
-    }
+<script setup>
+import Cross from "../assets/icon-cross.svg";
+import { defineProps, toRef, defineEmits } from "vue";
+
+const props = defineProps({
+  todo: Object,
+});
+const emits = defineEmits(["onDeleted", "changeStatus"]);
+
+const todo = toRef(props, "todo");
+
+function deleteTodo() {
+  if (confirm("آیا از حذف اطمینان دارید ؟")) {
+    emits("onDeleted", todo.value.id);
   }
+}
+function changeStatus() {
+  emits("changeStatus", todo.value.id, !todo.value.isComplete);
 }
 </script>
